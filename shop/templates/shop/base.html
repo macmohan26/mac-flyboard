@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}FLYBOARD{% endblock %}</title>
+    <script src="https://use.fontawesome.com/dca4c52d4d.js"></script>
+    <link rel="stylesheet" href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://v4-alpha.getbootstrap.com/examples/carousel/carousel.css">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/"><img style="width: 7em;"
+                                          src="https://raw.githubusercontent.com/abbubhai/flyboard/master/shop/logo.png?v=1"
+                                          alt="Home"></a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            {% for c in categories %}
+                <li {% if category.slug == c.slug %} {% endif %} class="nav-item">
+                    <a href="{{ c.get_absolute_url }}" class="nav-link">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav mt-2 mt-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">Hello {{ user.username }}</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown02">
+                        <a class="dropdown-item" href="{% url 'shop:logout' %}">Log Out</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="cart">
+                        {% with total_items=cart|length %}
+                            {% if cart|length > 0 %}
+                                <i class="fa fa-shopping-cart" aria-hidden="true" style="padding: .8em;color:#cc3a86"></i>
+                                <a href="{% url 'cart:cart_detail' %}">
+                                    {{ total_items }} item{{ total_items|pluralize }},
+                                    ${{ cart.get_total_price }}
+                                </a>
+                            {% else %}
+                                <i class="fa fa-shopping-cart" style="padding: .8em; color:#ccc49e" aria-hidden="true" title="Cart is empty"></i>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                </li>
+            </ul>
+        {% else %}
+            <ul class="navbar-nav mt-2 mt-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shop:login' %}" class="logo"><i class="fa fa-sign-in"
+                                                                                      aria-hidden="true"></i> My Account</a>
+                <li>
+            </ul>
+        {% endif %}
+    </div>
+</nav><br/>
+{% block content %}
+{% endblock %}
+<footer class="footer">
+         <p class="float-right"><a href="#">Back to top</a></p>
+    <div class="container">
+        <span class="text-muted">Flyboard 2017 @ mav5 Productions.</span>
+    </div>
+</footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="https://v4-alpha.getbootstrap.com/assets/js/vendor/holder.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="https://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+</html>

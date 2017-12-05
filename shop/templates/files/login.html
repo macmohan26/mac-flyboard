@@ -1,0 +1,33 @@
+{% extends "shop/base.html" %}
+{% block content %}
+
+<div class="container">
+<br/>
+    {% if form.errors %}
+        <p class="alert alert-danger">Your username and password didn't match. Please try again.</p>
+    {% endif %}
+{% if next %}
+    {% if user.is_authenticated %}
+    <p class=".alert-warning">Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<div class="wrapper">
+    <form class="form-signin" method="post" action="{% url 'shop:login' %}">
+        {% csrf_token %}
+      <h2 class="form-signin-heading">Please login</h2>
+      <input type="text" class="form-control" name="username" placeholder="User Name" required="" autofocus="" />
+      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
+      <input class="btn btn-lg btn-primary btn-block"  value="login" type="submit"/>
+        <a href="{% url 'shop:signup' %}" class="signup ">New User</a>
+        <input type="hidden" name="next" value="{{ next }}"/>
+        	{# Assumes you setup the password_reset view in your URLconf #}
+     <p><a href="{% url 'shop:password_reset' %}">Forgot password?</a></p>
+    </form>
+
+  </div>
+    </div>
+{% endblock %}

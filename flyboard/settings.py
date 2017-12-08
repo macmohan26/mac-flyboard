@@ -25,7 +25,7 @@ SECRET_KEY = '=j=-tp9bdug@xig=56fhbt_ib5dx3+l$t%((&0)z9o$*=pv0%r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1:8000', 'manmohanrathore.pythonanywhere.com']
 
 
 # Application definition
@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     'orders',
     'paypal.standard.ipn',
     'payment',
+    'rest_framework',
+
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,7 +76,9 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'flyboard.wsgi.application'
+
 
 
 # Database
@@ -139,10 +144,12 @@ PAYPAL_TEST = True
 
 LOGIN_REDIRECT_URL = '/'
 
+
+
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = 'abbubhai' #my gmail password
-EMAIL_HOST_USER = 'noreplyefsblogteam@gmail.com' #my gmail username
+EMAIL_HOST_PASSWORD = 'Abbubhai' #my gmail password
+EMAIL_HOST_USER = 'flyboardskates@gmail.com' #my gmail username
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

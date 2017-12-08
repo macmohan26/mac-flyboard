@@ -3,3 +3,4 @@ Django==1.11.7
 Paypal==1.2.5
 Amqp==2.2.2
 Billiard==3.5.0.3
+social-auth-core

@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from . import views, auth_views
+#from rest_framework.urlpatterns import format_suffix_patterns
+
 urlpatterns = [
     url(r'^$', views.product_list, name='product_list'),
     url(r'^(?P<category_slug>[-\w]+)/$',
@@ -18,4 +20,7 @@ urlpatterns = [
         auth_views.password_reset_confirm, name='password_reset_confirm'),
     url(r'^accounts/reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
     url(r'^accounts/signup/$', auth_views.signup, name='signup'),
+    url(r'^product_json/', views.ProductList.as_view()),
 ]
+
+#urlpatterns = format_suffix_patterns(urlpatterns)

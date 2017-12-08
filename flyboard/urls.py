@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^payment/', include('payment.urls', namespace='payment')),
     url(r'^', include('shop.urls', namespace='shop')),
     url(r'^accounts/', include('shop.urls', namespace='shop')),
+    #url(r'^', include('social_django.urls', namespace='social')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
